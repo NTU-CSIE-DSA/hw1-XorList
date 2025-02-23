@@ -1,0 +1,19 @@
+@subtask s0
+manual sample1.in
+manual sample2.in
+manual sample3.in
+
+@subtask s1
+
+@subtask s2
+@include s1
+
+@subtask s3
+@include s2
+
+@subtask s4
+@include s3
+
+@subtask s5
+@include s0
+@include s4

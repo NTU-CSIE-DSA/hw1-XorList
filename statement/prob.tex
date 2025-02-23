@@ -1,0 +1,119 @@
+\setcounter{secnumdepth}{0}
+
+\subsection{Problem Description}\label{problem-description}
+
+Doubly-linked lists are convenient, but come with two disadvantages. Firstly, two pointers are used per node instead of one, making it hard to fit small-cache/memory scenarios. Secondly, reversing a doubly-linked list typically requires swapping the \texttt{next} and \texttt{prev} pointers of every node, making it less efficient for applications with frequent reversal needs.
+
+The XOR linked list is here for rescue! In this problem, we ask you to implement the usual doubly-linked list and the XOR linked list. The following description of the XOR linked list is quoted from Wikipedia (\url{https://en.wikipedia.org/wiki/XOR_linked_list}): 
+
+{\it
+An XOR linked list is a type of data structure used in computer programming. It takes advantage of the bitwise XOR operation to decrease storage requirements for doubly linked lists by storing the composition of both addresses in one field. While the composed address is not meaningful on its own, during traversal it can be combined with knowledge of the last-visited node address to deduce the address of the following node.
+}
+
+Here are the 3 routines that we ask you to implement
+\begin{codebox}
+\Procname{$\proc{Next-Node}(node, prev)$}
+\li \Return $\attrib{node}{neighbors} \oplus prev$
+\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Insert-After}(node, prev, data)$}
+\li $next \gets \proc{Next-Node}(node, prev)$
+\li $newNode \gets \textsc{New-XOR-Node}(data, next \oplus node)$
+\li $\attrib{next}{neighbors} \gets \attrib{next}{neighbors} \oplus node \oplus newNode$
+\li $\attrib{node}{neighbors} \gets prev \oplus newNode$
+\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Remove-Here}(node, prev)$}
+\li $next \gets \proc{Next-Node}(node, prev)$
+\li $\attrib{prev}{neighbors} \gets \attrib{prev}{neighbors} \oplus node \oplus next$
+\li $\attrib{next}{neighbors} \gets \attrib{next}{neighbors} \oplus node \oplus prev$
+\li $\proc{Free}(node)$
+\End
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{Reverse}(prev, begin, end, next)$}
+\li $\attrib{prev}{neighbors} \gets \attrib{prev}{neighbors} \oplus begin \oplus end$
+\li $\attrib{begin}{neighbors} \gets \attrib{begin}{neighbors} \oplus prev \oplus next$
+\li $\attrib{end}{neighbors} \gets \attrib{end}{neighbors} \oplus next \oplus prev$
+\li $\attrib{next}{neighbors} \gets \attrib{next}{neighbors} \oplus end \oplus begin$
+\End
+\end{codebox}
+
+We will assume $data$ to be an integer that represents the number of $\textsc{New-XOR-Node}$ calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
+
+\subsection{Input}\label{input}
+
+Assuming initially the XOR linked list is empty. The first line includes one integers, $M$, representing the number of operation. The next $M$ lines include $2$ integers, $t$ and $k$. The first integer, $t$, represents the operation type:
+\begin{itemize}
+    \item Type $0$ is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    \item Type $1$ is for calling $\proc{Insert-After}$ at the head of the XOR linked list, The new node will then become the first node of the linked list.
+    \item Type $2$ is for calling $\proc{Insert-After}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
+    \item Type $3$ is for calling $\proc{Insert-After}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
+    \item Type $4$ is for calling $\proc{Remove-Here}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    \item Type $5$ is for calling $\proc{Remove-Here}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
+    \item Type $6$ is for calling $\proc{Reverse}$ from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
+\end{itemize}
+
+\subsection{Output}\label{output}
+For each type $0$ operation, print the value of the $data$ in the $k$-th node in one line.
+\subsection{Constraints}\label{constraint}
+
+\section*{Subtasks}
+\subsubsection{Subtask 1 (10 pts)}\label{subtask-1}
+\begin{itemize}
+\item only type $0$ and type $1$ operations
+\end{itemize}
+
+\subsubsection{Subtask 2 (15 pts)}\label{subtask-1}
+\begin{itemize}
+\item only type $0$ and type $1-2$ operations
+\end{itemize}
+
+\subsubsection{Subtask 3 (15 pts)}\label{subtask-1}
+\begin{itemize}
+\item only type $0$ and type $1-3$ operations
+\end{itemize}
+
+\subsubsection{Subtask 5 (20 pts)}\label{subtask-1}
+\begin{itemize}
+\item only type $0$ and type $1-5$ operations
+\end{itemize}
+
+\subsubsection{Subtask 6 (40 pts)}\label{subtask-1}
+\begin{itemize}
+\item only type $0$ and type $1-6$ operations
+\end{itemize}
+
+\subsection{Sample Testcases}
+
+\begin{multicols}{2}
+\subsubsection{Sample Input 1}\label{sample-input-1}
+\begin{verbatim}
+\end{verbatim}
+
+\columnbreak
+
+\subsubsection{Sample Output 1}\label{sample-output-1}
+\begin{verbatim}
+\end{verbatim}
+\end{multicols}
+
+\begin{multicols}{2}
+\subsubsection{Sample Input 2}\label{sample-input-2}
+\begin{verbatim}
+\end{verbatim}
+
+\columnbreak
+
+\subsubsection{Sample Output 2}\label{sample-output-2}
+\begin{verbatim}
+\end{verbatim}
+\end{multicols}
+
+
+
