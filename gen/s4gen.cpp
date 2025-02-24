@@ -5,7 +5,7 @@
 using namespace std;
 
 const int M_MAX=10000;
-const int T_MAX=3;
+const int T_MAX=5;
 
 int main(int argc, char* argv[]) {
 	registerGen(argc, argv, 1);
