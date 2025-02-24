@@ -2,7 +2,7 @@
 using namespace std;
 
 const int M_MAX=10000;
-const int T_MAX=6;
+const int T_MAX=2;
 
 int main() {
 	int length=0;

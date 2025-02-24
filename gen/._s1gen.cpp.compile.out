@@ -1,0 +1,4 @@
+s1gen.cpp: In function ‘int main(int, char**)’:
+s1gen.cpp:12:13: warning: unused variable ‘rnd_seed’ [-Wunused-variable]
+   12 |         int rnd_seed=atoi(argv[1]);
+      |             ^~~~~~~~

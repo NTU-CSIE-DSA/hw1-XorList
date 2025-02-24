@@ -14,7 +14,6 @@ int main(int argc, char* argv[]) {
 	int M=(atoi(argv[3])==0?rnd.next(1, M_MAX):atoi(argv[3]));
 	int ask_freq=atoi(argv[4]);
 	int del_freq=atoi(argv[5]);
-	int rev_freq=atoi(argv[6]);
 	//ask, del, add 
 	cout<<M<<"\n";
 	int length=0;
@@ -34,9 +33,6 @@ int main(int argc, char* argv[]) {
 					else cout<<"5 "<<rnd.next(1, length)<<"\n";
 					length--;
 				}
-				else if(length>0 && rnx>ask_freq && rnx<=ask_freq+rev_freq) {
-					cout<<"6 "<<rnd.next(1, (length+1)/2)<<"\n";
-				}
 				else {
 					int k=(length==0?0:rnd.next(1, length+1)-1);
 					if(k==0) cout<<"1 0\n";
@@ -54,7 +50,7 @@ int main(int argc, char* argv[]) {
 		length++;
 		del_freq=max(del_freq, 16);
 		if(rnd_seed%2) {
-			for(int i=1;i<=M-21;i++) {
+			for(int i=1;i<=M-31;i++) {
 				if(i%del_freq==17) {
 					cout<<"4 "<<length<<"\n";
 					length--;
@@ -63,10 +59,7 @@ int main(int argc, char* argv[]) {
 					cout<<"5 1\n";
 					length--;
 				}
-				else if(i%10==1) {
-					cout<<"6 1\n";
-				}
-				else if(i%2==0) {
+				else if(i%4==3) {
 					cout<<"2 "<<length<<"\n";
 					length++;
 				}
@@ -74,32 +67,37 @@ int main(int argc, char* argv[]) {
 					cout<<"3 1\n";
 					length++;
 				}
-			}
-			for(int i=1;i<=20;i++) {
-				cout<<"0 "<<length+1-i<<"\n";
-			}
-		}
-		else {
-			for(int i=1;i<=M-501;i++) {
-				if(i%2==0) {
-					cout<<"2 "<<length<<"\n";
-					length++;
-				}
-				else {
-					cout<<"3 1\n";
-					length++;
-				}
-			}
-			for(int i=M-500;i<=M-31;i++) {
-				cout<<"6 "<<rnd.next(1, 470)<<"\n";
 			}
 			for(int i=1;i<=30;i++) {
 				cout<<"0 "<<length+1-i<<"\n";
 			}
 		}
+		else {
+			for(int i=1;i<=M-31;i++) {
+				if(i%del_freq==11) {
+					cout<<"4 "<<(length+1)/2<<"\n";
+					length--;
+				}
+				else if(i%del_freq==13) {
+					cout<<"5 "<<(length+1)/2<<"\n";
+					length--;
+				}
+				else if(i%4==3) {
+					cout<<"2 "<<(length+1)/2<<"\n";
+					length++;
+				}
+				else {
+					cout<<"3 "<<(length+1)/2<<"\n";
+					length++;
+				}
+			}
+			for(int i=1;i<=30;i++) {
+				cout<<"0 "<<max(1, min(length, (M-20+1)/2+i))<<"\n";
+			}
+		}
 	}
 	else if(gentype=="askall") {
-		int exp_length=M/10*(10-ask_freq-rev_freq-2*del_freq);
+		int exp_length=M/10*(10-ask_freq-2*del_freq);
 		for(int i=0;i<M-exp_length;i++) {
 			if(length==0) {
 				cout<<"1 0\n";
@@ -114,9 +112,6 @@ int main(int argc, char* argv[]) {
 					if(rnx%2) cout<<"4 "<<rnd.next(1, length)<<"\n";
 					else cout<<"5 "<<rnd.next(1, length)<<"\n";
 					length--;
-				}
-				else if(length>0 && rnx>ask_freq && rnx<=ask_freq+rev_freq) {
-					cout<<"6 "<<rnd.next(1, (length+1)/2)<<"\n";
 				}
 				else {
 					int k=(length==0?0:rnd.next(1, length+1)-1);
@@ -178,7 +173,7 @@ int main(int argc, char* argv[]) {
 	}
 	else if(gentype=="empty") {
 		bool flag=0;
-		int empty, empty_freq=atoi(argv[7]);
+		int empty, empty_freq=atoi(argv[6]);
 		for(int i=1;i<=M;i++) {
 			if(flag) {
 				int rnx=rnd.next(1, 2);
@@ -197,9 +192,6 @@ int main(int argc, char* argv[]) {
 					if(rnx%2) cout<<"4 "<<rnd.next(1, length)<<"\n";
 					else cout<<"5 "<<rnd.next(1, length)<<"\n";
 					length--;
-				}
-				else if(length>0 && rnx>ask_freq && rnx<=ask_freq+rev_freq) {
-					cout<<"6 "<<rnd.next(1, (length+1)/2)<<"\n";
 				}
 				else {
 					int k=(length==0?0:rnd.next(1, length+1)-1);
