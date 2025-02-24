@@ -1,4 +1,0 @@
-s1valid.cpp: In function ‘int main()’:
-s1valid.cpp:18:21: warning: variable ‘k’ set but not used [-Wunused-but-set-variable]
-   18 |                 int k;
-      |                     ^
