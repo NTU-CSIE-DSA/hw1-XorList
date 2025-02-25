@@ -331,3 +331,4 @@ $1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$
 After completing the type_4 and type_6 operations, the `data` of the XOR linked list's become:
 
 $4\rightarrow 3\rightarrow 5$
+
