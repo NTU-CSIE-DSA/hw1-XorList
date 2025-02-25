@@ -324,7 +324,7 @@ where the leftmost value refers to the `data` of the first node.
 
 ### Sample 3 Explanation
 
-After completing the type_6 operation, , the `data` of the XOR linked list's become:
+After completing the type_6 operation, the `data` of the XOR linked list's become:
 
 $1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$
 
