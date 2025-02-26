@@ -13,10 +13,11 @@ s1gen 6 random 10000 3
 s1gen 7 random 10000 4
 s1gen 8 random 10000 5
 s1gen 9 tle 10000 1
-s1gen 10 askall 10000 1
-s1gen 11 askall 10000 2
-s1gen 12 askall 10000 3
-s1gen 13 askall 10000 4
+s1gen 10 tle 10000 1
+s1gen 11 askall 10000 1
+s1gen 12 askall 10000 2
+s1gen 13 askall 10000 3
+s1gen 14 askall 10000 4
 
 @subtask s2
 @include s1

@@ -34,11 +34,20 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	else if(gentype=="tle") {
-		for(int i=0;i<M/2;i++) {
-			cout<<"1 0\n";
-			length++;
+		if(rnd_seed%2) {
+			for(int i=0;i<M/2;i++) {
+				cout<<"1 0\n";
+				length++;
+			}
+			for(int i=0;i<M-M/2;i++) {
+				cout<<"0 "<<length<<"\n";
+			}
 		}
-		for(int i=0;i<M-M/2;i++) {
+		else {
+			for(int i=0;i<M-1;i++) {
+				cout<<"1 0\n";
+				length++;
+			}
 			cout<<"0 "<<length<<"\n";
 		}
 	}
