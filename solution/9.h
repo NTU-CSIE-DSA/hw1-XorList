@@ -7,7 +7,7 @@ struct Node {
 
 extern struct Node* head;
 extern struct Node* tail;
-extern int node_count, removed_count;
+extern int node_count;
 
 struct Node* Next_Node(struct Node* node, struct Node* prev);
 struct Node* New_XOR_Node(int data, struct Node* neighbors);

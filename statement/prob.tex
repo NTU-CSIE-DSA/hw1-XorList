@@ -14,7 +14,7 @@ An XOR linked list is a type of data structure used in computer programming. It 
 
 Detailed header file \texttt{9.h} is provided in the judge system.
 
-\noindent \texttt{Node} is a structure that stores the information of a node in XOR linked list. \texttt{head} and \texttt{tail} are the variables represent the head and the tail of the XOR linked list. \texttt{node\_count} and \texttt{removed\_count} are the variables students can utilize in the following implementation.
+\noindent \texttt{Node} is a structure that stores the information of a node in XOR linked list. \texttt{head} and \texttt{tail} are the variables represent the head and the tail of the XOR linked list. \texttt{node\_count} represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
 
 We provide 2 well-implemented functions for students to utilize.
 
@@ -64,6 +64,12 @@ Here are the 3 routines that we ask you to implement:
 \End
 \end{codebox}
 
+\begin{itemize}
+    \item $\textsc{Insert-After}(node, prev, data)$ is for inserting a node \texttt{newNode} with $data$ after the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
+    \item $\textsc{Remove-Here}(node, prev)$ is for removing the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
+    \item $\textsc{Reverse}(prev, begin, end, next)$ is for reversing all the nodes in range \texttt{[begin, end]}, where \texttt{prev} is the previous node of \texttt{begin} and \texttt{next} is the next node of \texttt{end}.
+\end{itemize}
+
 Here are 7 types of operations that we ask you to implement:
 
 \begin{itemize}
@@ -105,12 +111,13 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 \subsection{Constraints}\label{constraint}
 
 \begin{itemize}
-    \item $1\leq M\leq 10^4$
+    \item $1\leq M\leq 5\times 10^5$
     \item $t\in 0, 1, 2, 3, 4, 5, 6$
     \item if $t\in 0, 2, 3, 4, 5$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
     \item if $t\in 1$, $k=0$
     \item if $t\in 6$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
     \item It is ensured that if the XOR linked list is currently empty, $t\in 1$
+    \item $\sum k\leq 5\times 10^7$
 \end{itemize}
 
 \section*{Subtasks}

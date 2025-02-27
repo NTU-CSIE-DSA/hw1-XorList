@@ -8,7 +8,7 @@ The XOR linked list is here for rescue! In this problem, we ask you to implement
 
 ### 9.h
 
-Here is the defined header file `9.h`.
+Here is the defined header file `9.h`:
 
 ```c=
 #ifndef XORLIST_H
@@ -20,7 +20,7 @@ struct Node {
 
 extern struct Node* head;
 extern struct Node* tail;
-extern int node_count, removed_count;
+extern int node_count;
 
 struct Node* Next_Node(struct Node* node, struct Node* prev);
 struct Node* New_XOR_Node(int data, struct Node* neighbors);
@@ -39,7 +39,7 @@ void type_6(int k);
 #endif
 ```
 
-`Node` is a structure that stores the information of a node in XOR linked list. `head` and `tail` are the variables represent the head and the tail of the XOR linked list. `node_count` and `removed_count` are the variables students can utilize in the following implementation.
+`Node` is a structure that stores the information of a node in XOR linked list. `head` and `tail` are the variables represent the head and the tail of the XOR linked list. `node_count` represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
 
 We provide 2 well-implemented functions for students to utilize.
 
@@ -54,7 +54,7 @@ New-XOR-Node(data, neighbors)
     return newNode
 ```
 
-We assume `data` to be an integer that represents the number of `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
+We assume $data$ to be an integer that represents the number of `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
 
 **In this problem, you need to implement 3 routines and 7 types of operations which are defined in the header file `9.h`.**
 
@@ -84,6 +84,10 @@ Reverse(prev, begin, end, next)
     next.neighbors = next.neighbors ⊕ end ⊕ begin
 ```
 
+* `Insert-After(node, prev, data)` is for inserting a node `newNode` with $data$ after the node `node`, where `prev` is the previous node of `node`.
+* `Remove-Here(node, prev)` is for removing the node `node`, where `prev` is the previous node of `node`.
+* `Reverse(prev, begin, end, next)` is for reversing all the nodes in range `[begin, end]`, where `prev` is the previous node of `begin` and `next` is the next node of `end`.
+
 Here are 7 types of operations that we ask you to implement:
 
 * `type_0(k)` is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
@@ -108,7 +112,7 @@ Here are 7 types of operations that we ask you to implement:
 
 struct Node* head;
 struct Node* tail;
-int node_count, removed_count;
+int node_count;
 
 struct Node* Next_Node(struct Node* node, struct Node* prev) {
     return (struct Node*)((uintptr_t)node->neighbors ^ (uintptr_t)prev);
@@ -142,7 +146,6 @@ We will run `main.c` to test your code.
 
 int main() {
     node_count = 1;
-    removed_count = 0;
     int M;
     scanf("%d", &M);
     for (int i = 1; i <= M; i++) {
@@ -167,12 +170,10 @@ int main() {
             }
             case 4: {
                 type_4(k);
-                removed_count++;
                 break;
             }
             case 5: {
                 type_5(k);
-                removed_count++;
                 break;
             }
             case 6: {
@@ -194,7 +195,6 @@ int main() {
 }
 ```
 
-
 ## Input
 
 We assume initially the XOR linked list is empty. The first line includes one integers, $M$, representing the number of operation. The next $M$ lines include $2$ integers, $t$ and $k$. The first integer, $t$, represents the operation type. The second integer, $k$, represents the additional parameters for the operation.
@@ -205,12 +205,13 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 
 ## Constraints
 
-* $1\leq M\leq 10^4$
+* $1\leq M\leq 5\times 10^5$
 * $t\in 0, 1, 2, 3, 4, 5, 6$
 * if $t\in 0, 2, 3, 4, 5$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
 * if $t\in 1$, $k=0$
 * if $t\in 6$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
 * It is ensured that if the XOR linked list is currently empty, $t\in 1$
+* $\sum k\leq 5\times 10^7$
 
 ## Subtasks
 

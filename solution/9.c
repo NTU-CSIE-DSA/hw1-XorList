@@ -5,7 +5,7 @@
 
 struct Node* head;
 struct Node* tail;
-int node_count, removed_count;
+int node_count;
 
 struct Node* Next_Node(struct Node* node, struct Node* prev) {
     return (struct Node*)((uintptr_t)node->neighbors ^ (uintptr_t)prev);
@@ -65,7 +65,7 @@ int type_0(int k) {
     struct Node* prev = NULL;
     struct Node* next;
     int count = 1;
-
+    
     while (curr && count < k) {
         next = Next_Node(curr, prev);
         prev = curr;
@@ -101,16 +101,17 @@ void type_2(int k, int data) {
 }
 
 void type_3(int k, int data) {
-	struct Node* curr = head;
-    struct Node* prev = NULL;
-    struct Node* next;
+	struct Node* curr = tail;
+    struct Node* next = NULL;
+    struct Node* prev;
     int count = 1;
-    while (curr && count < node_count - 1 - removed_count - k) {
-        next = Next_Node(curr, prev);
-        prev = curr;
-        curr = next;
+    while (curr && count < k) {
+        prev = Next_Node(curr, next);
+        next = curr;
+        curr = prev;
         count++;
     }
+	prev = Next_Node(curr, next);
 	Insert_After(curr, prev, data);
 }
 
@@ -118,7 +119,7 @@ void type_4(int k) {
 	struct Node* curr = head;
 	struct Node* prev = NULL;
 	struct Node* next;
-	int count = 1;
+	int count = 1;	
 	while (curr && count < k) {
 		next = Next_Node(curr, prev);
 		prev = curr;
@@ -129,16 +130,17 @@ void type_4(int k) {
 }
 
 void type_5(int k) {
-	struct Node* curr = head;
-	struct Node* prev = NULL;
-	struct Node* next;
-	int count = 1;
-	while (curr && count < node_count - removed_count - k) {
-		next = Next_Node(curr, prev);
-		prev = curr;
-		curr = next;
-		count++;
-	}
+	struct Node* curr = tail;
+    struct Node* next = NULL;
+    struct Node* prev;
+    int count = 1;
+    while (curr && count < k) {
+        prev = Next_Node(curr, next);
+        next = curr;
+        curr = prev;
+        count++;
+    }
+	prev = Next_Node(curr, next);
 	Remove_Here(curr, prev);
 }
 
@@ -154,12 +156,12 @@ void type_6(int k) {
         count++;
     }
 	count = 1;
-	struct Node* next = head;
-	struct Node* end = NULL;
-    while (next && count < node_count-removed_count-k+1) {
-        curr = Next_Node(next, end);
-        end = next;
-        next = curr;
+	struct Node* end = tail;
+    struct Node* next = NULL;
+    while (end && count < k) {
+        curr = Next_Node(end, next);
+        next = end;
+        end = curr;
         count++;
     }
 	Reverse(prev, begin, end, next);

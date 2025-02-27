@@ -5,7 +5,6 @@
 
 int main() {
     node_count = 1;
-    removed_count = 0;
     int M;
     scanf("%d", &M);
     for (int i = 1; i <= M; i++) {
@@ -30,12 +29,10 @@ int main() {
             }
             case 4: {
                 type_4(k);
-                removed_count++;
                 break;
             }
             case 5: {
                 type_5(k);
-                removed_count++;
                 break;
             }
             case 6: {
