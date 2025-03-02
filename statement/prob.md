@@ -206,34 +206,34 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 ## Constraints
 
 * $1\leq M\leq 5\times 10^5$
-* $t\in 0, 1, 2, 3, 4, 5, 6$
-* if $t\in 0, 2, 3, 4, 5$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
-* if $t\in 1$, $k=0$
-* if $t\in 6$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
-* It is ensured that if the XOR linked list is currently empty, $t\in 1$
+* $t\in \{0, 1, 2, 3, 4, 5, 6\}$
+* For all $t\in \{0, 2, 3, 4, 5\}$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
+* For all $t\in \{1\}$, $k=0$
+* For all $t\in \{6\}$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
+* We ensure that if the XOR linked list is currently empty, $t\in 1$
 * $\sum k\leq 5\times 10^7$
 
 ## Subtasks
 
 ### Subtask 1 (10 pts)
 
-* $t\in 0, 1$
+* $t\in$ {$0, 1$}
 
 ### Subtask 2 (15 pts)
 
-* $t\in 0, 1, 2$
+* $t\in$ {$0, 1, 2$}
 
 ### Subtask 3 (15 pts)
 
-* $t\in 0, 1, 2, 3$
+* $t\in$ {$0, 1, 2, 3$}
 
 ### Subtask 4 (20 pts)
 
-* $t\in 0, 1, 2, 3, 4, 5$
+* $t\in$ {$0, 1, 2, 3, 4, 5$}
 
 ### Subtask 5 (40 pts)
 
-* $t\in 0, 1, 2, 3, 4, 5, 6$
+No other constraints.
 
 ## Sample Testcases
 
@@ -313,11 +313,11 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 
 ### Sample 1 Explanation
 
-After completing first two type_1 operations, the `data` of the XOR linked list's nodes are:
+After completing first two `type_1` operations, the `data` of the XOR linked list's nodes are:
 
 $2\rightarrow 1$
 
-After completing the last type_1 operation, the `data` of the XOR linked list's become:
+After completing the last `type_1` operation, the `data` of the XOR linked list's become:
 
 $3\rightarrow 2\rightarrow 1$
 
@@ -325,11 +325,10 @@ where the leftmost value refers to the `data` of the first node.
 
 ### Sample 3 Explanation
 
-After completing the type_6 operation, the `data` of the XOR linked list's become:
+After completing the `type_6` operation, the `data` of the XOR linked list's become:
 
 $1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$
 
-After completing the type_4 and type_6 operations, the `data` of the XOR linked list's become:
+After completing the `type_4` and `type_6` operations, the `data` of the XOR linked list's become:
 
 $4\rightarrow 3\rightarrow 5$
-

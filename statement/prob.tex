@@ -12,11 +12,13 @@ An XOR linked list is a type of data structure used in computer programming. It 
 
 \subsubsection{9.h}\label{9.h}
 
-Detailed header file \texttt{9.h} is provided in the judge system.
+{\it Detailed header file \texttt{9.h} is provided in the judge system.}
 
-\noindent \texttt{Node} is a structure that stores the information of a node in XOR linked list. \texttt{head} and \texttt{tail} are the variables represent the head and the tail of the XOR linked list. \texttt{node\_count} represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
+\bigskip
 
-We provide 2 well-implemented functions for students to utilize.
+\noindent\texttt{Node} is a structure that stores the information of a node in XOR linked list. \texttt{head} and \texttt{tail} are the variables represent the head and the tail of the XOR linked list. \texttt{node\_count} represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
+
+\noindent We provide 2 well-implemented functions for students to utilize.
 
 \begin{codebox}
 \Procname{$\proc{Next-Node}(node, prev)$}
@@ -33,9 +35,9 @@ We provide 2 well-implemented functions for students to utilize.
 
 We assume $data$ to be an integer that represents the number of $\textsc{New-XOR-Node}$ calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
 
-\textbf{In this problem, you need to implement 3 routines and 7 types of operations which are defined in the header file \texttt{9.h}.}
+\noindent\textbf{In this problem, you need to implement 3 routines and 7 types of operations which are defined in the header file \texttt{9.h}.}
 
-Here are the 3 routines that we ask you to implement:
+\noindent Here are the 3 routines that we ask you to implement:
 
 \begin{codebox}
 \Procname{$\proc{Insert-After}(node, prev, data)$}
@@ -73,20 +75,22 @@ Here are the 3 routines that we ask you to implement:
 Here are 7 types of operations that we ask you to implement:
 
 \begin{itemize}
-    \item $type\_0(k)$ is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-    \item $type\_1(data)$ is for calling $\proc{Insert-After}$ at the head of the XOR linked list, The new node will then become the first node of the linked list.
-    \item $type\_2(k, data)$ is for calling $\proc{Insert-After}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
-    \item $type\_3(k, data)$ is for calling $\proc{Insert-After}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
-    \item $type\_4(k)$ is for calling $\proc{Remove-Here}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-    \item $type\_5(k)$ is for calling $\proc{Remove-Here}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
-    \item $type\_6(k)$ is for calling $\proc{Reverse}$ from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
+    \item \texttt{type\_0(}$k$\texttt{)} is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    \texttt{type\_1(data)} is for calling $\proc{Insert-After}$ at the head of the XOR linked list, The new node will then become the first node of the linked list.
+    \item \texttt{type\_2(}$k,\, data$\texttt{)} is for calling $\proc{Insert-After}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
+    \item \texttt{type\_3(}$k,data$\texttt{)} is for calling $\proc{Insert-After}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
+    \item \texttt{type\_4(}$k$\texttt{)} is for calling $\proc{Remove-Here}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    \item \texttt{type\_5(}$k$\texttt{)} is for calling $\proc{Remove-Here}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
+    \item \texttt{type\_6(}$k$\texttt{)} is for calling $\proc{Reverse}$ from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
 \end{itemize}
 
-\textbf{You should only upload the file \texttt{9.c} and do not output anything to stdout.} Otherwise, you may get unexpected error. In addition, we strongly recommend you not to modify any parts other than the annotation at the very bottom. 
+\noindent\textbf{You should only upload the file \texttt{9.c} and do not output anything to stdout.} Otherwise, you may get unexpected error. In addition, we strongly recommend you not to modify any parts other than the annotation at the very bottom. 
 
 \subsubsection{9.c}\label{9.c}
 
-Detailed \texttt{9.c} is provided in the judge system.
+{\it Detailed \texttt{9.c} is provided in the judge system.}
+
+\bigskip
 
 \noindent We will use the following command to compile your code:
 
@@ -98,7 +102,7 @@ Detailed \texttt{9.c} is provided in the judge system.
 
 \subsubsection{main.c}\label{main.c}
 
-Detailed \texttt{main.c} is provided in the judge system.
+{\it Detailed \texttt{main.c} is provided in the judge system.}
 
 \subsection{Input}\label{input}
 
@@ -112,39 +116,38 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 
 \begin{itemize}
     \item $1\leq M\leq 5\times 10^5$
-    \item $t\in 0, 1, 2, 3, 4, 5, 6$
-    \item if $t\in 0, 2, 3, 4, 5$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
-    \item if $t\in 1$, $k=0$
-    \item if $t\in 6$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
-    \item It is ensured that if the XOR linked list is currently empty, $t\in 1$
+    \item $t\in \{0, 1, 2, 3, 4, 5, 6\}$
+    \item For all $t\in \{0, 2, 3, 4, 5\}$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
+    \item For all $t\in \{1\}$, $k=0$
+    \item For all $t\in \{6\}$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
+    \item We ensure that if the XOR linked list is currently empty, $t\in 1$
     \item $\sum k\leq 5\times 10^7$
 \end{itemize}
 
-\section*{Subtasks}
+\subsection*{Subtasks}
 \subsubsection{Subtask 1 (10 pts)}\label{subtask-1}
 \begin{itemize}
-\item $t\in 0, 1$
+\item $t\in \{0, 1\}$
 \end{itemize}
 
 \subsubsection{Subtask 2 (15 pts)}\label{subtask-2}
 \begin{itemize}
-\item $t\in 0, 1, 2$
+\item $t\in \{0, 1, 2\}$
 \end{itemize}
 
 \subsubsection{Subtask 3 (15 pts)}\label{subtask-3}
 \begin{itemize}
-\item $t\in 0, 1, 2, 3$
+\item $t\in \{0, 1, 2, 3\}$
 \end{itemize}
 
 \subsubsection{Subtask 4 (20 pts)}\label{subtask-4}
 \begin{itemize}
-\item $t\in 0, 1, 2, 3, 4, 5$
+\item $t\in \{0, 1, 2, 3, 4, 5\}$
 \end{itemize}
 
 \subsubsection{Subtask 5 (40 pts)}\label{subtask-5}
-\begin{itemize}
-\item $t\in 0, 1, 2, 3, 4, 5, 6$
-\end{itemize}
+
+No other constraints.
 
 \subsection{Sample Testcases}\label{sample-testcases}
 
@@ -229,15 +232,15 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 
 \subsubsection{Sample 1 Explanation}\label{sample-1-explanation}
 
-After completing first two $type\_1$ operations, the \texttt{data} of the XOR linked list's nodes are: \\
+After completing first two \texttt{type\_1} operations, the \texttt{data} of the XOR linked list's nodes are: \\
 $2\rightarrow 1$ \\
-After completing the last $type\_1$ operation, the \texttt{data} of the XOR linked list's become: \\
+After completing the last \texttt{type\_1} operation, the \texttt{data} of the XOR linked list's become: \\
 $3\rightarrow 2\rightarrow 1$ \\
 where the leftmost value refers to the \texttt{data} of the first node.
 
 \subsubsection{Sample 3 Explanation}\label{sample-3-explanation}
 
-After completing the $type\_6$ operation, the \texttt{data} of the XOR linked list's become: \\
+After completing the \texttt{type\_6} operation, the \texttt{data} of the XOR linked list's become: \\
 $1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$ \\
-After completing the $type\_4$ and $type\_6$ operations, the \texttt{data} of the XOR linked list's become: \\
+After completing the \texttt{type\_4} and \texttt{type\_6} operations, the \texttt{data} of the XOR linked list's become: \\
 $4\rightarrow 3\rightarrow 5$
