@@ -31,7 +31,7 @@ The two utility functions that are implemented and can be directly used are
 
 \begin{codebox}
 \Procname{$\proc{New-XOR-Node}(neighbors)$}
-\li initialize $newNode$ with $data$ and $neighbors$
+\li initialize $newNode$ with $data$ (see below) and $neighbors$
 \li \Return $newNode$
 \End
 \end{codebox}
@@ -111,10 +111,10 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
     \item $1\leq M\leq 5\times 10^5$
     \item $t\in \{0, 1, 2, 3, 4, 5, 6\}$
     \item For all $t\in \{0, 2, 3, 4, 5\}$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
-    \item For all $t\in \{1\}$, $k=0$
-    \item For all $t\in \{6\}$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
-    \item We ensure that if the XOR linked list is currently empty, $t\in 1$
-    \item $\sum k\leq 5\times 10^7$
+    \item When $t = \{1\}$, there is a dummy $k=0$
+    \item When $t = \{6\}$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
+    \item We ensure that if the XOR linked list is currently empty, $t = 1$
+    \item the total $k$ within the $M$ operations is $\leq 5\times 10^7$
 \end{itemize}
 
 \subsection*{Subtasks}
@@ -141,8 +141,6 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 \subsubsection{Subtask 5 (40 pts)}\label{subtask-5}
 
 No other constraints.
-
-\newpage
 
 \subsection{Sample Testcases}\label{sample-testcases}
 
@@ -227,17 +225,16 @@ No other constraints.
 
 \subsection{Hints}\label{hints}
 
-\subsubsection{Sample 1 Explanation}\label{sample-1-explanation}
+\subsubsection{Sample 1 Explanations}\label{sample-1-explanation}
 
-After completing first two \texttt{type\_1} operations, the \texttt{data} of the XOR linked list's nodes are: \\
-$2\rightarrow 1$ \\
-After completing the last \texttt{type\_1} operation, the \texttt{data} of the XOR linked list's become: \\
-$3\rightarrow 2\rightarrow 1$ \\
-where the leftmost value refers to the \texttt{data} of the first node.
+\begin{itemize}
+\item After completing first two \texttt{type\_1} operations, the \texttt{data} of the XOR linked list's nodes are: $2\rightarrow 1$, where \texttt{head} is on the left.
+\item After completing the last \texttt{type\_1} operation, the \texttt{data} of the XOR linked list's nodes are: $3\rightarrow 2\rightarrow 1$.
+\end{itemize}
 
-\subsubsection{Sample 3 Explanation}\label{sample-3-explanation}
+\subsubsection{Sample 3 Explanations}\label{sample-3-explanation}
 
-After completing the \texttt{type\_6} operation, the \texttt{data} of the XOR linked list's become: \\
-$1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$ \\
-After completing the \texttt{type\_4} and \texttt{type\_6} operations, the \texttt{data} of the XOR linked list's become: \\
-$4\rightarrow 3\rightarrow 5$
+\begin{itemize}
+\item After completing the \texttt{type\_6} operation, the \texttt{data} of the XOR linked list's nodes are: $1\rightarrow 4\rightarrow 2\rightarrow 3\rightarrow 5$. 
+\item After completing the \texttt{type\_4} and \texttt{type\_5} operations, the \texttt{data} of the XOR linked list's nodes are: $4\rightarrow 3\rightarrow 5$.
+\end{itemize}
