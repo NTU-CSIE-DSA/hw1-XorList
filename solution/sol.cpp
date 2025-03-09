@@ -9,22 +9,22 @@ struct Node {
 
 struct Node* head = NULL;
 struct Node* tail = NULL;
-int node_count=1;
+int next_node_id=1;
 
 struct Node* Next_Node(struct Node* node, struct Node* prev) {
     return (struct Node*)((uintptr_t)node->neighbors ^ (uintptr_t)prev);
 }
 
-struct Node* New_XOR_Node(int data, struct Node* neighbors) {
+struct Node* New_XOR_Node(struct Node* neighbors) {
     struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    new_node->data = data;
+    new_node->data = next_node_id++;
     new_node->neighbors = neighbors;
     return new_node;
 }
 
-void Insert_After(struct Node* node, struct Node* prev, int data) {
+void Insert_After(struct Node* node, struct Node* prev) {
     struct Node* next = Next_Node(node, prev);
-    struct Node* newNode = New_XOR_Node(data, (struct Node*)((uintptr_t)next ^ (uintptr_t)node));
+    struct Node* newNode = New_XOR_Node((struct Node*)((uintptr_t)next ^ (uintptr_t)node));
     if (next) {
         next->neighbors = (struct Node*)((uintptr_t)next->neighbors ^ (uintptr_t)node ^ (uintptr_t)newNode);
     } else {
@@ -79,18 +79,18 @@ int type_0(int k) {
 	return curr->data;
 }
 
-void type_1(int data) {
+void type_1() {
 	if (!head) {
-		head = New_XOR_Node(data, NULL);
+		head = New_XOR_Node(NULL);
 		tail = head;
 	} else {
 		struct Node* old_head = head;
-		head = New_XOR_Node(data, (struct Node*)(uintptr_t)old_head);
+		head = New_XOR_Node((struct Node*)(uintptr_t)old_head);
 		old_head->neighbors = (struct Node*)((uintptr_t)old_head->neighbors ^ (uintptr_t)head);
 	}
 }
 
-void type_2(int k, int data) {
+void type_2(int k) {
 	struct Node* curr = head;
     struct Node* prev = NULL;
     struct Node* next;
@@ -101,10 +101,10 @@ void type_2(int k, int data) {
         curr = next;
         count++;
     }
-	Insert_After(curr, prev, data);
+	Insert_After(curr, prev);
 }
 
-void type_3(int k, int data) {
+void type_3(int k) {
 	struct Node* curr = tail;
     struct Node* next = NULL;
     struct Node* prev;
@@ -116,7 +116,7 @@ void type_3(int k, int data) {
         count++;
     }
 	prev = Next_Node(curr, next);
-	Insert_After(curr, prev, data);
+	Insert_After(curr, prev);
 }
 
 void type_4(int k) {
@@ -183,15 +183,15 @@ int main() {
 				break;
             }
             case 1: {
-                type_1(node_count++);
+                type_1();
                 break;
             }
             case 2: {
-				type_2(k, node_count++);
+				type_2(k);
                 break;
             }
             case 3: {
-				type_3(k, node_count++);
+				type_3(k);
                 break;
             }
             case 4: {

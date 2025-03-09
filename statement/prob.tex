@@ -4,22 +4,25 @@
 
 Doubly-linked lists are convenient, but come with two disadvantages. Firstly, two pointers are used per node instead of one, making it hard to fit small-cache/memory scenarios. Secondly, reversing a doubly-linked list typically requires swapping the \texttt{next} and \texttt{prev} pointers of every node, making it less efficient for applications with frequent reversal needs.
 
-The XOR linked list is here for rescue! In this problem, we ask you to implement the usual doubly-linked list and the XOR linked list. The following description of the XOR linked list is quoted from Wikipedia (\url{https://en.wikipedia.org/wiki/XOR_linked_list}): 
+The XOR linked list is here for rescue! In this problem, we ask you to play with it. The following description of the XOR linked list is quoted from Wikipedia (\url{https://en.wikipedia.org/wiki/XOR_linked_list}): 
 
 {\it
 An XOR linked list is a type of data structure used in computer programming. It takes advantage of the bitwise XOR operation to decrease storage requirements for doubly linked lists by storing the composition of both addresses in one field. While the composed address is not meaningful on its own, during traversal it can be combined with knowledge of the last-visited node address to deduce the address of the following node.
 }
 
-\subsubsection{9.h}\label{9.h}
+\subsubsection{Provided Files}\label{provided_files}
 
-{\it Detailed header file \texttt{9.h} is provided in the judge system.}
+In NTU COOL, we provide you with three files: a header file \texttt{9.h}, a supplementing source file \texttt{9.c}, and the main source file \texttt{main.c}. Your goal is to complete \texttt{9.c}. Then, we will use the following command to compile your code:
+\begin{center}
+\texttt{gcc 9.c main.c -static -O2 -std=c11}
+\end{center}
+where \texttt{9.c} is your submitted code, and \texttt{main.c} and \texttt{9.h} are the exact same ones that you fetched from NTU COOL. 
 
-\bigskip
+The header file \texttt{9.h} contains the implementation of 2 utility functions as well as the signatures of 3 routines and 7 types of operations. All functions are based on the \texttt{Node} structure that stores the information of a node in the XOR linked list. The external variables \texttt{head} and \texttt{tail} represent the head and the tail of the XOR linked list, respectively. Their actual declarations are given in \texttt{9.c}. 
 
-\noindent\texttt{Node} is a structure that stores the information of a node in XOR linked list. \texttt{head} and \texttt{tail} are the variables represent the head and the tail of the XOR linked list. \texttt{node\_count} represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
+\newpage
 
-\noindent We provide 2 well-implemented functions for students to utilize.
-
+The two utility functions that are implemented and can be directly used are
 \begin{codebox}
 \Procname{$\proc{Next-Node}(node, prev)$}
 \li \Return $\attrib{node}{neighbors} \oplus prev$
@@ -27,26 +30,28 @@ An XOR linked list is a type of data structure used in computer programming. It 
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{New-XOR-Node}(data, neighbors)$}
-\li initialize $newNode$
+\Procname{$\proc{New-XOR-Node}(neighbors)$}
+\li initialize $newNode$ with $data$ and $neighbors$
 \li \Return $newNode$
 \End
 \end{codebox}
 
-We assume $data$ to be an integer that represents the number of $\textsc{New-XOR-Node}$ calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
+To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to $\textsc{New-XOR-Node}$ calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on. The next ID is stored in an external variable called \texttt{next\_node\_id}, whose actual declaration is given in \texttt{9.c}.
 
-\noindent\textbf{In this problem, you need to implement 3 routines and 7 types of operations which are defined in the header file \texttt{9.h}.}
-
-\noindent Here are the 3 routines that we ask you to implement:
+In \texttt{9.c}, you need to implement 3 routines and 7 types of operations, as declared in \texttt{9.h}. The 3 routines are
+\begin{itemize}
+    \item The $O(1)$-time $\textsc{Insert-After}(node, prev)$ is for inserting a node \texttt{newNode} after the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
 
 \begin{codebox}
-\Procname{$\proc{Insert-After}(node, prev, data)$}
+\Procname{$\proc{Insert-After}(node, prev)$}
 \li $next \gets \proc{Next-Node}(node, prev)$
-\li $newNode \gets \textsc{New-XOR-Node}(data, next \oplus node)$
+\li $newNode \gets \textsc{New-XOR-Node}(next \oplus node)$
 \li $\attrib{next}{neighbors} \gets \attrib{next}{neighbors} \oplus node \oplus newNode$
 \li $\attrib{node}{neighbors} \gets prev \oplus newNode$
 \End
 \end{codebox}
+    
+    \item The $O(1)$-time $\textsc{Remove-Here}(node, prev)$ is for removing the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
 
 \begin{codebox}
 \Procname{$\proc{Remove-Here}(node, prev)$}
@@ -56,6 +61,8 @@ We assume $data$ to be an integer that represents the number of $\textsc{New-XOR
 \li $\proc{Free}(node)$
 \End
 \end{codebox}
+    
+    \item The $O(1)$-time $\textsc{Reverse}(prev, begin, end, next)$ is for reversing all the nodes in range \texttt{[begin, end]}, where \texttt{prev} is the previous node of \texttt{begin} and \texttt{next} is the next node of \texttt{end}.
 
 \begin{codebox}
 \Procname{$\proc{Reverse}(prev, begin, end, next)$}
@@ -64,45 +71,31 @@ We assume $data$ to be an integer that represents the number of $\textsc{New-XOR
 \li $\attrib{end}{neighbors} \gets \attrib{end}{neighbors} \oplus next \oplus prev$
 \li $\attrib{next}{neighbors} \gets \attrib{next}{neighbors} \oplus end \oplus begin$
 \End
-\end{codebox}
-
-\begin{itemize}
-    \item $\textsc{Insert-After}(node, prev, data)$ is for inserting a node \texttt{newNode} with $data$ after the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
-    \item $\textsc{Remove-Here}(node, prev)$ is for removing the node \texttt{node}, where \texttt{prev} is the previous node of \texttt{node}.
-    \item $\textsc{Reverse}(prev, begin, end, next)$ is for reversing all the nodes in range \texttt{[begin, end]}, where \texttt{prev} is the previous node of \texttt{begin} and \texttt{next} is the next node of \texttt{end}.
+\end{codebox}    
 \end{itemize}
 
-Here are 7 types of operations that we ask you to implement:
-
+After completing the 3 routines, you can then use them to implement the 7 types of operations below.
 \begin{itemize}
-    \item \texttt{type\_0(}$k$\texttt{)} is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-    \texttt{type\_1(data)} is for calling $\proc{Insert-After}$ at the head of the XOR linked list, The new node will then become the first node of the linked list.
-    \item \texttt{type\_2(}$k,\, data$\texttt{)} is for calling $\proc{Insert-After}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
-    \item \texttt{type\_3(}$k,data$\texttt{)} is for calling $\proc{Insert-After}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
-    \item \texttt{type\_4(}$k$\texttt{)} is for calling $\proc{Remove-Here}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-    \item \texttt{type\_5(}$k$\texttt{)} is for calling $\proc{Remove-Here}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
-    \item \texttt{type\_6(}$k$\texttt{)} is for calling $\proc{Reverse}$ from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
+    \item \texttt{type\_0(}$k$\texttt{)} prints out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    
+    \item \texttt{type\_1()} calls $\proc{Insert-After}$ at the head of the XOR linked list, The new node will then become the first node of the linked list.
+    
+    \item \texttt{type\_2(}$k$\texttt{)} calls $\proc{Insert-After}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
+    
+    \item \texttt{type\_3(}$k$\texttt{)} calls $\proc{Insert-After}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
+    
+    \item \texttt{type\_4(}$k$\texttt{)} calls $\proc{Remove-Here}$ at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+    
+    \item \texttt{type\_5(}$k$\texttt{)} calls $\proc{Remove-Here}$ at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
+    
+    \item \texttt{type\_6(}$k$\texttt{)} calls $\proc{Reverse}$ from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
 \end{itemize}
 
-\noindent\textbf{You should only upload the file \texttt{9.c} and do not output anything to stdout.} Otherwise, you may get unexpected error. In addition, we strongly recommend you not to modify any parts other than the annotation at the very bottom. 
+The file \texttt{main.c} is the actual program entrance that will be used to test your code. It contains input processing and calls to the 7 types of operations. You do not need to change anything in \texttt{main.c}. 
 
-\subsubsection{9.c}\label{9.c}
+We will only use the \texttt{9.c} that you pushed to the judge system to test your code. Therefore, you are strongly suggested not to change \texttt{9.h} and \texttt{main.c} at all. In addition, you do not need to do any outputting within \texttt{9.c}. Otherwise you risk being misjudged by the system.
 
-{\it Detailed \texttt{9.c} is provided in the judge system.}
-
-\bigskip
-
-\noindent We will use the following command to compile your code:
-
-\begin{center}
-\texttt{gcc 9.c main.c -static -O2 -std=c11}
-\end{center}
-
-\noindent We will run \texttt{main.c} to test your code.
-
-\subsubsection{main.c}\label{main.c}
-
-{\it Detailed \texttt{main.c} is provided in the judge system.}
+\newpage
 
 \subsection{Input}\label{input}
 
@@ -148,6 +141,8 @@ For each type $0$ operation, print the value of the $data$ in the $k$-th node in
 \subsubsection{Subtask 5 (40 pts)}\label{subtask-5}
 
 No other constraints.
+
+\newpage
 
 \subsection{Sample Testcases}\label{sample-testcases}
 
@@ -200,6 +195,8 @@ No other constraints.
 5
 \end{verbatim}
 \end{multicols}
+
+\newpage
 
 \begin{multicols}{2}
 \subsubsection{Sample Input 3}\label{sample-input-3}
