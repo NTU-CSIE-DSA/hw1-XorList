@@ -2,7 +2,7 @@
 
 Doubly-linked lists are convenient, but come with two disadvantages. Firstly, two pointers are used per node instead of one, making it hard to fit small-cache/memory scenarios. Secondly, reversing a doubly-linked list typically requires swapping the `next` and `prev` pointers of every node, making it less efficient for applications with frequent reversal needs.
 
-The XOR linked list is here for rescue! In this problem, we ask you to implement the usual doubly-linked list and the XOR linked list. The following description of the XOR linked list is quoted from [Wikipedia](https://en.wikipedia.org/wiki/XOR_linked_list): 
+The XOR linked list is here for rescue! In this problem, we ask you to play with it. The following description of the XOR linked list is quoted from [Wikipedia](https://en.wikipedia.org/wiki/XOR_linked_list): 
 
 *An XOR linked list is a type of data structure used in computer programming. It takes advantage of the bitwise XOR operation to decrease storage requirements for doubly linked lists by storing the composition of both addresses in one field. While the composed address is not meaningful on its own, during traversal it can be combined with knowledge of the last-visited node address to deduce the address of the following node.*
 
@@ -51,7 +51,7 @@ void type_6(int k);
 #endif
 ```
 
-* Skeleton source file `9.c`:
+* Supplementing source file `9.c`:
 
 ```c=
 #include <stdio.h>
@@ -131,7 +131,7 @@ Your goal is to complete `9.c`. Then, we will use the following command to compi
 
 `gcc 9.c main.c -std=c11 -static -O2`
 
-where `9.c` is your submitted code, and `main.c` and `9.h` are the exact same ones that you fetched from NTU COOL or judge. Note that you should only push `9.c` to the judge system.
+where `9.c` is your submitted code, and `main.c` and `9.h` are the exact same ones that you fetched from NTU COOL or judge system.
 
 The header file `9.h` contains the implementation of 2 utility functions as well as the signatures of 3 routines and 7 types of operations. All functions are based on the `Node` structure that stores the information of a node in the XOR linked list. The external variables `head` and `tail` represent the head and the tail of the XOR linked list, respectively. Their actual declarations are given in `9.c`. 
 
@@ -148,9 +148,7 @@ New-XOR-Node(neighbors)
     return newNode
 ```
 
-To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to `New-XOR-Node` calls so far. The next ID is stored in an external variable called $next\_node\_id$, whose actual declaration is given in `9.c`.
-
-We assume $data$ to be an integer that represents the number of `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
+To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on. The next ID is stored in an external variable called $next\_node\_id$, whose actual declaration is given in `9.c`.
 
 In `9.c`, you need to implement 3 routines and 7 types of operations, as declared in `9.h`. The 3 routines are
 
