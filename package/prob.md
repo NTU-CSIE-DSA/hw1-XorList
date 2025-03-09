@@ -89,9 +89,9 @@ For each `type_0` operation, print the value of the $data$ in the $k$-th node in
 
 * $1\leq M\leq 5\times 10^5$
 * $t\in \{0, 1, 2, 3, 4, 5, 6\}$
-* For all $t\in \{0, 2, 3, 4, 5\}$, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
-* When $t = \{1\}$, $k=0$
-* When $t = \{6\}$, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
+* For all $t\in$ {$0, 2, 3, 4, 5$}, $1\leq k\leq |L|$, where $|L|$ is the current length of the XOR linked list
+* When $t = $ {$1$}, $k=0$
+* When $t = $ {$6$}, $1\leq k\leq \lceil{\frac{|L|}{2}}\rceil$, where $|L|$ is the current length of the XOR linked list
 * We ensure that if the XOR linked list is currently empty, $t = 1$
 * The total $k$ within the $M$ operations is $\leq 5\times 10^7$
 
