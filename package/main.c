@@ -4,7 +4,7 @@
 #include "9.h"
 
 int main() {
-    node_count = 1;
+    next_node_id = 1;
     int M;
     scanf("%d", &M);
     for (int i = 1; i <= M; i++) {
@@ -16,15 +16,15 @@ int main() {
                 break;
             }
             case 1: {
-                type_1(node_count++);
+                type_1();
                 break;
             }
             case 2: {
-                type_2(k, node_count++);
+                type_2(k);
                 break;
             }
             case 3: {
-                type_3(k, node_count++);
+                type_3(k);
                 break;
             }
             case 4: {

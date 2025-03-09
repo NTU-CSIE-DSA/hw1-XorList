@@ -6,13 +6,16 @@ The XOR linked list is here for rescue! In this problem, we ask you to implement
 
 *An XOR linked list is a type of data structure used in computer programming. It takes advantage of the bitwise XOR operation to decrease storage requirements for doubly linked lists by storing the composition of both addresses in one field. While the composed address is not meaningful on its own, during traversal it can be combined with knowledge of the last-visited node address to deduce the address of the following node.*
 
-### 9.h
+### Provided Files
 
-Here is the defined header file `9.h`:
+* Header file `9.h`:
 
 ```c=
 #ifndef XORLIST_H
 #define XORLIST_H
+#include <stdint.h>
+#include <stdlib.h>
+
 struct Node {
     int data;
     struct Node* neighbors;
@@ -20,89 +23,35 @@ struct Node {
 
 extern struct Node* head;
 extern struct Node* tail;
-extern int node_count;
+extern int next_node_id;
 
-struct Node* Next_Node(struct Node* node, struct Node* prev);
-struct Node* New_XOR_Node(int data, struct Node* neighbors);
+static inline struct Node* Next_Node(struct Node* node, struct Node* prev) {
+    return (struct Node*)((uintptr_t)node->neighbors ^ (uintptr_t)prev);
+}
 
-void Insert_After(struct Node* node, struct Node* prev, int data);
+static inline struct Node* New_XOR_Node(struct Node* neighbors) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = next_node_id++;
+    new_node->neighbors = neighbors;
+    return new_node;
+}
+
+void Insert_After(struct Node* node, struct Node* prev);
 void Remove_Here(struct Node* node, struct Node* prev);
 void Reverse(struct Node* prev, struct Node* begin, struct Node* end, struct Node* next);
 
 int type_0(int k);
-void type_1(int data);
-void type_2(int k, int data);
-void type_3(int k, int data);
+void type_1();
+void type_2(int k);
+void type_3(int k);
 void type_4(int k);
 void type_5(int k);
 void type_6(int k);
+
 #endif
 ```
 
-`Node` is a structure that stores the information of a node in XOR linked list. `head` and `tail` are the variables represent the head and the tail of the XOR linked list. `node_count` represents the upcoming count of nodes in the XOR linked list if the next node is inserted.
-
-We provide 2 well-implemented functions for students to utilize.
-
-```=
-Next-Node(node, prev)
-    return node.neighbors ⊕ prev
-```
-
-```=
-New-XOR-Node(data, neighbors)
-    initialize newNode
-    return newNode
-```
-
-We assume $data$ to be an integer that represents the number of `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
-
-**In this problem, you need to implement 3 routines and 7 types of operations which are defined in the header file `9.h`.**
-
-Here are the 3 routines that we ask you to implement:
-
-```=
-Insert-After(node, prev, data):
-    next = Next-Node(node, prev)
-    newNode = New-XOR-Node(data, next ⊕ node)
-    next.neighbors = next.neighbors ⊕ node ⊕ newNode
-    node.neighbors = prev ⊕ newNode
-```
-
-```=
-Remove-Here(node, prev):
-    next = Next-Node(node, prev)
-    prev.neighbors = prev.neighbors ⊕ node ⊕ next
-    next.neighbors = next.neighbors ⊕ node ⊕ prev
-    Free(node)
-```
-
-```=
-Reverse(prev, begin, end, next)
-    prev.neighbors = prev.neighbors ⊕ begin ⊕ end
-    begin.neighbors = begin.neighbors ⊕ prev ⊕ next
-    end.neighbors = end.neighbors ⊕ next ⊕ prev
-    next.neighbors = next.neighbors ⊕ end ⊕ begin
-```
-
-* `Insert-After(node, prev, data)` is for inserting a node `newNode` with $data$ after the node `node`, where `prev` is the previous node of `node`.
-* `Remove-Here(node, prev)` is for removing the node `node`, where `prev` is the previous node of `node`.
-* `Reverse(prev, begin, end, next)` is for reversing all the nodes in range `[begin, end]`, where `prev` is the previous node of `begin` and `next` is the next node of `end`.
-
-Here are 7 types of operations that we ask you to implement:
-
-* `type_0(k)` is for printing out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-* `type_1(data)` is for calling `Insert-After` at the head of the XOR linked list, The new node will then become the first node of the linked list.
-* `type_2(k, data)` is for calling `Insert-After` at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
-* `type_3(k, data)` is for calling `Insert-After` at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
-* `type_4(k)` is for calling `Remove-Here` at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
-* `type_5(k)` is for calling `Remove-Here` at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
-* `type_6(k)` is for calling `Reverse` from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
-
-----
-
-**You should only upload the file `9.c` and do not output anything to stdout.** Otherwise, you may get unexpected error. In addition, we strongly recommend you not to modify any parts other than the annotation at the very bottom. 
-
-### 9.c
+* Skeleton source file `9.c`:
 
 ```c=
 #include <stdio.h>
@@ -112,31 +61,14 @@ Here are 7 types of operations that we ask you to implement:
 
 struct Node* head;
 struct Node* tail;
-int node_count;
-
-struct Node* Next_Node(struct Node* node, struct Node* prev) {
-    return (struct Node*)((uintptr_t)node->neighbors ^ (uintptr_t)prev);
-}
-
-struct Node* New_XOR_Node(int data, struct Node* neighbors) {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    new_node->data = data;
-    new_node->neighbors = neighbors;
-    return new_node;
-}
+int next_node_id;
 
 /*
 Finish your implementation for the 3 routines and 7 types of operations HERE
 */
 ```
 
-We will use the following command to compile your code:
-
-`gcc 9.c main.c -std=c11 -static -O2`
-
-We will run `main.c` to test your code.
-
-### main.c
+* Main source file `main.c`:
 
 ```c=
 #include <stdio.h>
@@ -145,7 +77,7 @@ We will run `main.c` to test your code.
 #include "9.h"
 
 int main() {
-    node_count = 1;
+    next_node_id = 1;
     int M;
     scanf("%d", &M);
     for (int i = 1; i <= M; i++) {
@@ -157,15 +89,15 @@ int main() {
                 break;
             }
             case 1: {
-                type_1(node_count++);
+                type_1();
                 break;
             }
             case 2: {
-                type_2(k, node_count++);
+                type_2(k);
                 break;
             }
             case 3: {
-                type_3(k, node_count++);
+                type_3(k);
                 break;
             }
             case 4: {
@@ -194,6 +126,77 @@ int main() {
     return 0;
 }
 ```
+
+Your goal is to complete `9.c`. Then, we will use the following command to compile your code:
+
+`gcc 9.c main.c -std=c11 -static -O2`
+
+where `9.c` is your submitted code, and `main.c` and `9.h` are the exact same ones that you fetched from NTU COOL or judge. Note that you should only push `9.c` to the judge system.
+
+The header file `9.h` contains the implementation of 2 utility functions as well as the signatures of 3 routines and 7 types of operations. All functions are based on the `Node` structure that stores the information of a node in the XOR linked list. The external variables `head` and `tail` represent the head and the tail of the XOR linked list, respectively. Their actual declarations are given in `9.c`. 
+
+The two utility functions that are implemented and can be directly used are
+
+```=
+Next-Node(node, prev)
+    return node.neighbors ⊕ prev
+```
+
+```=
+New-XOR-Node(neighbors)
+    initialize newNode with data and neighbors
+    return newNode
+```
+
+To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to `New-XOR-Node` calls so far. The next ID is stored in an external variable called $next\_node\_id$, whose actual declaration is given in `9.c`.
+
+We assume $data$ to be an integer that represents the number of `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on.
+
+In `9.c`, you need to implement 3 routines and 7 types of operations, as declared in `9.h`. The 3 routines are
+
+* The $O(1)$-time `Insert-After(node, prev)` is for inserting a node `newNode` after the node `node`, where `prev` is the previous node of `node`.
+
+```=
+Insert-After(node, prev):
+    next = Next-Node(node, prev)
+    newNode = New-XOR-Node(next ⊕ node)
+    next.neighbors = next.neighbors ⊕ node ⊕ newNode
+    node.neighbors = prev ⊕ newNode
+```
+
+* The $O(1)$-time `Remove-Here(node, prev)` is for removing the node `node`, where `prev` is the previous node of `node`.
+
+```=
+Remove-Here(node, prev):
+    next = Next-Node(node, prev)
+    prev.neighbors = prev.neighbors ⊕ node ⊕ next
+    next.neighbors = next.neighbors ⊕ node ⊕ prev
+    Free(node)
+```
+
+* The $O(1)$-time `Reverse(prev, begin, end, next)` is for reversing all the nodes in range `[begin, end]`, where `prev` is the previous node of `begin` and `next` is the next node of `end`.
+
+```=
+Reverse(prev, begin, end, next)
+    prev.neighbors = prev.neighbors ⊕ begin ⊕ end
+    begin.neighbors = begin.neighbors ⊕ prev ⊕ next
+    end.neighbors = end.neighbors ⊕ next ⊕ prev
+    next.neighbors = next.neighbors ⊕ end ⊕ begin
+```
+
+After completing the 3 routines, you can then use them to implement the 7 types of operations below.
+
+* `type_0(k)` prints out the $data$ field of the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+* `type_1()` calls `Insert-After` at the head of the XOR linked list, The new node will then become the first node of the linked list.
+* `type_2(k)` calls `Insert-After` at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $(k+1)$-th node of the linked list.
+* `type_3(k)` calls `Insert-After` at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. The new node will then become the $k$-th last node of the linked list.
+* `type_4(k)` calls `Remove-Here` at the $k$-th node of the XOR linked list, where $k$ is $1$-indexed.
+* `type_5(k)` calls `Remove-Here` at the $k$-th last node of the XOR linked list, where $k$ is $1$-indexed. 
+* `type_6(k)` calls `Reverse` from the $k$-th node of the XOR linked list to the $k$-th last node of the XOR linked list.
+
+The file `main.c` is the actual program entrance that will be used to test your code. It contains input processing and calls to the 7 types of operations. You do not need to change anything in `main.c`. 
+
+We will only use the `9.c` that you pushed to the judge system to test your code. Therefore, you are strongly suggested not to change `9.h` and `main.c` at all. In addition, you do not need to do any outputting within `9.c`. Otherwise you risk being misjudged by the system.
 
 ## Input
 
