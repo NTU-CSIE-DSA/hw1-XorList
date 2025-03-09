@@ -148,7 +148,7 @@ New-XOR-Node(neighbors)
     return newNode
 ```
 
-To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on. The next ID is stored in an external variable called $next_node_id$, whose actual declaration is given in `9.c`.
+To simplify the implementation logistics, we assume that $data$ will be assigned to a sequential ID that represents the number of calls to `New-XOR-Node` calls so far. That is, the first new node will contain $data = 1$, the second new node will contain $data = 2$, and so on. The next ID is stored in an external variable called `next_node_id`, whose actual declaration is given in `9.c`.
 
 In `9.c`, you need to implement 3 routines and 7 types of operations, as declared in `9.h`. The 3 routines are
 
